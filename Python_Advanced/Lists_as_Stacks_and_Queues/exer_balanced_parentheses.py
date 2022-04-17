@@ -9,12 +9,15 @@ while list_of_parentheses:
     if left_value == 40:
         right_value_1 = right_value_1 + 1
         right_value_2 = right_value_2 + 1
-    if left_value == right_value_1:
-        list_of_parentheses.popleft()
-        list_of_parentheses.popleft()
-    elif left_value == right_value_2:
-        list_of_parentheses.popleft()
-        list_of_parentheses.pop()
+    if len(list_of_parentheses) > 0:
+        if left_value == right_value_1:
+            list_of_parentheses.popleft()
+            list_of_parentheses.popleft()
+        elif left_value == right_value_2:
+            list_of_parentheses.popleft()
+            list_of_parentheses.pop()
+        else:
+            break
     else:
         break
 if len(list_of_parentheses) > 0:
