@@ -7,6 +7,3 @@ even_length_list = [print(word) for word in input().split() if not len(word) % 2
 #
 # for word in even_length_list:
 #     print(word)
-
-
-
