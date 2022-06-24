@@ -30,7 +30,7 @@ def math_operations(*args, **kwargs):
             values_to_operate = every_fourth(n)
             for val in values_to_operate:
                 kwargs[operation] *= val
-    for k, v in sorted(kwargs.items(), key=lambda x: (-x[1],x[0])):
+    for k, v in sorted(kwargs.items(), key=lambda x: (-x[1], x[0])):
         res += f"{k}: {v:.1f}\n"
     return res
 

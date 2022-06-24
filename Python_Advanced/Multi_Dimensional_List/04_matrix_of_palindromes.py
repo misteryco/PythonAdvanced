@@ -7,17 +7,14 @@
 
 
 rows, columns = [int(x) for x in input().split()]
-# matrx = data_to_matrx(rows)
-# print(matrx)
+
 matrx = []
 for _ in range(rows):
     row_data = input().split()
     matrx.append(row_data)
 
-# columns_range = [x for x in range(columns)]
-# rows_range = [x for x in range(columns)]
-
 command = input().split()
+
 while command[0] != "END":
     flag = False
     if len(command) == 5 and command[0] == "swap":

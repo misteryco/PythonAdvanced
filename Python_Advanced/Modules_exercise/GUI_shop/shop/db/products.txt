@@ -1,0 +1,3 @@
+{'id': 1, 'name': product1, 'img.path': 'img1.jpeg', 'count' = 20}
+{'id': 2, 'name': product2, 'img.path': 'img2.jpeg', 'count' = 30}
+{'id': 3, 'name': product3, 'img.path': 'img3.jpeg', 'count' = 40}
