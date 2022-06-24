@@ -22,7 +22,7 @@ def out_of_range(pos):
     return True
 
 
-def move(fld, cmd, pos):
+def move(cmd, pos):
     delta = []
     if cmd == "up":
         delta = [-1, 0]
@@ -46,7 +46,7 @@ command = input()
 field[position[0]][position[1]] = "*"
 while command:
     old_r, old_c = position
-    position = move(field, command, position)
+    position = move(command, position)
     if out_of_range(position):
         loose = True
         break
