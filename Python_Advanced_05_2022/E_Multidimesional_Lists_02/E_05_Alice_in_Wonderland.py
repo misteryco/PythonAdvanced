@@ -37,7 +37,6 @@ def move(cmd, pos):
     return [pos_r, pos_c]
 
 
-field = []
 size = int(input())
 field, position = setup(size)
 loose = False
