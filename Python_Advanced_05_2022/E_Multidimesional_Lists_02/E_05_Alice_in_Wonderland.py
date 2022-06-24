@@ -1,56 +1,70 @@
-def valid_coordinates(ro, co):
-    if 0 <= ro <= size and 0 <= co <= size:
-        return True
-    else:
+def setup(siz):
+    fld = []
+    pos = []
+    for r in range(siz):
+        data = input().split(" ")
+        for c, value in enumerate(data):
+            if value == "A":
+                pos = [r, c]
+        fld.append(data)
+    return fld, pos
+
+
+def print_field(fld):
+    for r in fld:
+        print(" ".join(r))
+
+
+def out_of_range(pos):
+    row, col = pos[0], pos[1]
+    if 0 <= row < size and 0 <= col < size:
         return False
+    return True
 
 
-def next_move(comm, r, c):
-    next_r, next_c = None, None
-    if comm == "up":
-        next_r, next_c = r - 1, c
-    elif comm == "down":
-        next_r, next_c = r + 1, c
-    elif comm == "left":
-        next_r, next_c = r, c - 1
-    elif comm == "right":
-        next_r, next_c = r, c + 1
-    return next_r, next_c
+def move(fld, cmd, pos):
+    delta = []
+    if cmd == "up":
+        delta = [-1, 0]
+    elif cmd == "down":
+        delta = [1, 0]
+    elif cmd == "left":
+        delta = [0, -1]
+    elif cmd == "right":
+        delta = [0, 1]
+    pos_r = pos[0] + delta[0]
+    pos_c = pos[1] + delta[1]
+    return [pos_r, pos_c]
 
 
+field = []
 size = int(input())
-territory = []
-alice_row, alice_col = None, None
-for row in range(size):
-    current_row = input().split()
-    for col in range(len(current_row)):
-        if current_row[col] == "A":
-            alice_row, alice_col = row, col
-    territory.append(current_row)
-
-territory[alice_row][alice_col] = "*"
-tea_bags = 0
+field, position = setup(size)
+loose = False
+teabags = 0
 command = input()
-while True:
-    a_next_r, a_next_c = next_move(command, alice_row, alice_col)
-    if valid_coordinates(a_next_r, a_next_c):
-        if territory[a_next_r][a_next_c] == ".":
-            territory[a_next_r][a_next_c] = "*"
-        elif territory[a_next_r][a_next_c].isnumeric():
-            tea_bags += int(territory[a_next_r][a_next_c])
-            territory[a_next_r][a_next_c] = "*"
-            if tea_bags >= 10:
-                print(f"She did it! She went to the party.")
-                break
-        elif territory[a_next_r][a_next_c] == "R":
-            territory[a_next_r][a_next_c] = "*"
-            print(f"Alice didn't make it to the tea party.")
-            break
-    else:
-        print(f"Alice didn't make it to the tea party.")
+field[position[0]][position[1]] = "*"
+while command:
+    old_r, old_c = position
+    position = move(field, command, position)
+    if out_of_range(position):
+        loose = True
         break
-    alice_row, alice_col = a_next_r, a_next_c
+    new_r, new_c = position
+    if field[new_r][new_c] == "R":
+        loose = True
+        field[new_r][new_c] = "*"
+        break
+    elif field[new_r][new_c].isdigit():
+        teabags += int(field[new_r][new_c])
+    field[new_r][new_c] = "*"
+    if teabags >= 10:
+        break
     command = input()
 
-for row in territory:
-    print(" ".join(row))
+if loose:
+    print("Alice didn't make it to the tea party.")
+else:
+    print("She did it! She went to the party.")
+
+print_field(field)
