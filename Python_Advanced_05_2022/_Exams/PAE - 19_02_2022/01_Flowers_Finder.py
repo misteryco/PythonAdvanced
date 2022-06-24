@@ -2,7 +2,7 @@ from collections import deque
 
 
 def found_vowels_and_consonants(search_words, vowel_char, consonant_char):
-    # function that found vowel or consonant in list of serach_words
+    # function that found vowel or consonant in list of search_words
     chars = set()
     for word in searched_words:
         if vowels_char in word:
